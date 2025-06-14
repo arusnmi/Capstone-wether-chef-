@@ -2,7 +2,7 @@ import requests
 
 WEATHERSTACK_API_KEY = "5b29a320d021aa5aa8f035f4ecd38fac"  # Replace with your API key
 WEATHERSTACK_BASE_URL = "http://api.weatherstack.com/current"
-location = "Mumbai" 
+location="Mumbai"
 
 
 def get_weather(location):
