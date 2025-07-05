@@ -12,10 +12,17 @@ model=genai.GenerativeModel('gemini-1.5-pro')
 
 location="Mumbai"
 wethar_data=Weather.get_weather(location)
+Traindata=Train.train_ai()
 
 def seson():
     response= model.generate_content("based on the this weather data: "+str(wethar_data)+", tell me the season in the provence, but only give the seson")
     return response
 
 
-print("The season is: ",seson())
+def sesional_recpie():
+    response= model.generate_content("based on the this weather data: "+str(wethar_data)+" and this data: "+str(Traindata)+", give me a recipe that is suitable for this season, but only give the recipe")
+    return response
+
+
+def custom_recpie(custom_prompt):
+    response= model.generate_content("based on this data: "+str(Traindata)+", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
