@@ -7,7 +7,7 @@ gemini_api_key = "AIzaSyDcaLxpis4q_QofT1xmu9KOwi45gfkBD6I"
 
 genai.configure(api_key=gemini_api_key) 
 
-model=genai.GenerativeModel('gemini-1.5-pro')
+model=genai.GenerativeModel('gemini-1.5-flash')
 
 
 location="Mumbai"
@@ -25,4 +25,9 @@ def sesional_recpie():
 
 
 def custom_recpie(custom_prompt):
-    response= model.generate_content("based on this data: "+str(Traindata)+", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
+    response= model.generate_content("based on this data: "+str(custom_prompt)+", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
+    print (response.text)
+    return response
+
+
+custom_recpie(Traindata)

@@ -205,4 +205,5 @@ def train_ai():
     7. Stir in garam masala and garnish with fresh coriander leaves.
     8. Serve hot with roti, paratha, or as a filling for sandwiches."""
     prompt=prompt+input("Enter your prompt: ")
+   
     return prompt
