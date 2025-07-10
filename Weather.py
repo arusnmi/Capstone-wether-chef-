@@ -28,11 +28,5 @@ def get_weather(location):
     else:
         return {"error": f"API request failed with status code {response.status_code}"}
 
-weather = get_weather(location)
 
-print(f"**Location:** {weather['location']}")
-print(f"**Temperature:** {weather['temperature']}°C")
-print(f"**Description:** {weather['description']}")
-print(f"**Humidity:** {weather['humidity']}%")
-print(f"**Wind Speed:** {weather['wind_speed']} km/h")
 

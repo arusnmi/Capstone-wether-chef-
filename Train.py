@@ -204,6 +204,6 @@ def train_ai():
     6. Cook on medium-low heat for 5-7 minutes, stirring occasionally, until the paneer is heated through and the spices are well incorporated.
     7. Stir in garam masala and garnish with fresh coriander leaves.
     8. Serve hot with roti, paratha, or as a filling for sandwiches."""
-    prompt=prompt+input("Enter your prompt: ")
+    
    
     return prompt

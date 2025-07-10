@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 
-csv_file1 = 'recipes_with_categories.csv'
+csv_file1 = 'recipes_final.csv'
 db_file1 = 'recpies.db'
 table_name = 'my_table'
 
