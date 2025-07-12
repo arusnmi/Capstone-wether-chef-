@@ -14,20 +14,12 @@ model=genai.GenerativeModel('gemini-1.5-flash')
 
 
 
-
 Traindata=Train.train_ai()
 
-def seson(location):
-    wethar_data=Weather.get_weather(location)
-    response= model.generate_content("based on the this weather data: "+str(wethar_data)+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
-    return response.text.strip()
-print("Weather condition:", seson("New York"))
-
-def sesional_recpie(season_weather):
+def seson(wethar_data):
     
-    print("Detected season/weather:", season_weather)
-
-   
+    Seson_guess_response= model.generate_content("based on the this weather data: "+str(wethar_data)+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
+    season_weather=Seson_guess_response.text.strip()
     season = None
     weather = None
     if "cold" in season_weather.lower():
@@ -54,16 +46,14 @@ def sesional_recpie(season_weather):
         f"Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format"+str(Traindata)+". "
         f"Only provide the recipe, no additional information."
     )
-    response = model.generate_content(prompt)
-    print(response.text)
-    return response.text
+    Recpie_response = model.generate_content(prompt)
+    return Seson_guess_response.text,Recpie_response.text
 
 
 
 def custom_recpie(custom_prompt):
     response= model.generate_content("based on this data: "+str(custom_prompt)+", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
     print (response.text)
-    return response
+    return response.text
 
 
-sesional_recpie()
