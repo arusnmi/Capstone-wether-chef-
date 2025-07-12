@@ -1,2 +1,8 @@
 streamlit
-openai
+requests
+google.generativeai
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
