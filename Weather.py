@@ -3,7 +3,8 @@ import openmeteo_requests
 import pandas as pd
 import requests_cache
 from retry_requests import retry
-def temp():
+
+def get_weathar(lat, long):
     # Setup the Open-Meteo API client with cache and retry on error
     cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
     retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
@@ -13,8 +14,8 @@ def temp():
     # The order of variables in hourly or daily is important to assign them correctly below
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
-        "latitude": 52.52,
-        "longitude": 13.41,
+        "latitude": lat,
+        "longitude": long,
         "current": ["temperature_2m", "relative_humidity_2m"]
     }
     responses = openmeteo.weather_api(url, params=params)
@@ -30,8 +31,8 @@ def temp():
 
     return current_temperature_2m, current_relative_humidity_2m
 
-temp, humidity = temp()
+temp, humidity = get_weathar(18.9582, 72.8321)
 
-print (f"Current temperature: {temp}°C")
-print (f"Current relative humidity: {humidity}%")
+print ("Current temperature:", temp, "°C")
+print ("Current relative humidity:", humidity, "%")
 

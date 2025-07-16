@@ -23,8 +23,14 @@ city= st.selectbox(
     ["Mumbai", "Ladakh", "Riyad", "Siberia"]
 )
 
-location = city  
-wethar_data=Weather.get_weather(location)
+# if city == "Mumbai":
+#     lat, long = 18.9582, 72.8321
+# elif city == "Ladakh":
+#     lat, long = 34.1526, 77.5775
+# elif city == "Riyad":
+#     lat, long = 24.7136, 46.6753
+# elif city == "Siberia":
+#     lat, long = 60.0000, 105.0000
 
 
 
