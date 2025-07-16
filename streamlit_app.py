@@ -22,15 +22,26 @@ city= st.selectbox(
     "Select your city",
     ["Mumbai", "Ladakh", "Riyad", "Siberia"]
 )
+if city == "Mumbai":
+    lat= 18.9582
+    long= 72.8321
+elif city == "Ladakh":
+    lat= 34.2268
+    long= 77.5619
+elif city == "Riyad":
+    lat= 24.7136
+    long= 46.6753
+elif city == "Siberia":
+    lat= 61.0137
+    long= 99.1967
 
-location = city  
-wethar_data=Weather.get_weather(location)
+temp, hum= Weather.get_weather_data(lat, long)
 
 
 
 if st.button("Generate recipe"):
     try:
-        recipe = Genai.seson(wethar_data)
+        recipe = Genai.seson(temp, hum)
         st.write(recipe)
     except Exception as e:
         st.error(f"An error occurred: {e}")
