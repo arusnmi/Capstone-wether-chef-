@@ -15,10 +15,10 @@ model=genai.GenerativeModel('gemini-1.5-flash')
 
 
 Traindata=Train.train_ai()
-wethar_temp, wethar_humidity = Weather.get_weathar(18.9582, 72.8321)
-def seson(wethar_temp, wethar_humidity):
+
+def seson(current_temperature_2m, current_relative_humidity_2m ):
     
-    Seson_guess_response= model.generate_content("based on the this weather data: "+str(wethar_temp)+"and"+str( wethar_humidity)+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
+    Seson_guess_response= model.generate_content("based on the this weather data: "+str(current_temperature_2m)+"and"+str( current_relative_humidity_2m)+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
     season_weather=Seson_guess_response.text.strip()
     season = None
     weather = None
@@ -49,7 +49,7 @@ def seson(wethar_temp, wethar_humidity):
     Recpie_response = model.generate_content(prompt)
     return Seson_guess_response.text,Recpie_response.text
 
-print("Season and Weather:", seson(wethar_temp, wethar_humidity))
+
 
 def custom_recpie(custom_prompt):
     response= model.generate_content("based on this data: "+str(custom_prompt)+", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)

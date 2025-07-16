@@ -2,6 +2,7 @@ import streamlit as st
 import Genai
 import Weather
 
+
 # Show title and description.
 st.title("AI chefbot")
 
@@ -23,20 +24,23 @@ city= st.selectbox(
     ["Mumbai", "Ladakh", "Riyad", "Siberia"]
 )
 
-# if city == "Mumbai":
-#     lat, long = 18.9582, 72.8321
-# elif city == "Ladakh":
-#     lat, long = 34.1526, 77.5775
-# elif city == "Riyad":
-#     lat, long = 24.7136, 46.6753
-# elif city == "Siberia":
-#     lat, long = 60.0000, 105.0000
+
 
 
 
 if st.button("Generate recipe"):
     try:
-        recipe = Genai.seson(wethar_data)
+        if city == "Mumbai":
+            lat, long = 18.9582, 72.8321
+        elif city == "Ladakh":
+            lat, long = 34.2268, 77.5619
+        elif city == "Riyad":
+            lat, long = 24.7136, 46.6753
+        elif city == "Siberia":
+            lat, long = 61.0137, 99.1967
+    
+        temp,humidity = Weather.get_weathar(lat, long)
+        recipe = Genai.seson(temp, humidity)
         st.write(recipe)
     except Exception as e:
         st.error(f"An error occurred: {e}")

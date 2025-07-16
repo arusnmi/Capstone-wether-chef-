@@ -31,8 +31,8 @@ def get_weathar(lat, long):
 
     return current_temperature_2m, current_relative_humidity_2m
 
-temp, humidity = get_weathar(18.9582, 72.8321)
+# temp, humidity = get_weathar(18.9582, 72.8321)
 
-print ("Current temperature:", temp, "°C")
-print ("Current relative humidity:", humidity, "%")
+# print ("Current temperature:", temp, "°C")
+# print ("Current relative humidity:", humidity, "%")
 
