@@ -5,12 +5,11 @@ pandas
 numpy
 scikit-learn
 matplotlib
-<<<<<<< HEAD
 seaborn
 sqlite3
 requests_cache
 retry_requests
 openmeteo_requests
-=======
-seaborn
->>>>>>> parent of 0bda78c (🌥️ Fixed the weathar API and made some changes to strip html code)
+
+
+
