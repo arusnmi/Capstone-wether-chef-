@@ -7,3 +7,6 @@ scikit-learn
 matplotlib
 seaborn
 sqlite3
+requests_cache
+retry_requests
+openmeteo_requests
