@@ -160,50 +160,7 @@ def train_ai():
     10. Serve the hot bhaji with buttered pav and a wedge of lemon.
     Prompt 9:
 
-    User: Can you give me a recipe for a refreshing Indian yogurt-based drink?
-    AI: Recipe for Lassi (Sweet Yogurt Drink):
-
-    Ingredients:
-    1 cup plain yogurt (dahi)
-    1/2 cup milk (chilled)
-    2-3 tablespoons sugar (adjust to taste)
-    1/4 teaspoon cardamom powder (optional)
-    A few ice cubes
-
-    Instructions:
-    1. In a blender, combine the plain yogurt, chilled milk, and sugar.
-    2. Blend until smooth and frothy.
-    3. Add cardamom powder (if using) and blend for a few more seconds.
-    4. Add ice cubes and blend briefly.
-    5. Pour the lassi into glasses and serve chilled. You can garnish with a pinch of cardamom powder or chopped nuts if desired.
-    Prompt 10:
-
-    User: I have some paneer and want to make a dry, flavorful side dish.
-    AI: Recipe for Paneer Bhurji (Scrambled Cottage Cheese):
-
-    Ingredients:
-    200g paneer (Indian cottage cheese), crumbled
-    1 medium onion, finely chopped
-    1 small tomato, finely chopped
-    1 green chili, finely chopped
-    1/2 inch ginger, grated
-    1/4 teaspoon turmeric powder
-    1/2 teaspoon red chili powder
-    1/2 teaspoon coriander powder
-    1/4 teaspoon garam masala
-    2 tablespoons vegetable oil
-    Salt to taste
-    Fresh coriander leaves for garnish
-
-    Instructions:
-    1. Heat oil in a pan. Add finely chopped onion and sauté until golden brown.
-    2. Add grated ginger and finely chopped green chili. Sauté for a minute.
-    3. Add finely chopped tomato and cook until it softens.
-    4. Add turmeric powder, red chili powder, and coriander powder. Sauté for a few seconds.
-    5. Add the crumbled paneer and salt to taste. Gently mix everything together.
-    6. Cook on medium-low heat for 5-7 minutes, stirring occasionally, until the paneer is heated through and the spices are well incorporated.
-    7. Stir in garam masala and garnish with fresh coriander leaves.
-    8. Serve hot with roti, paratha, or as a filling for sandwiches."""
+    """
     
    
     return prompt
