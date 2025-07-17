@@ -21,7 +21,7 @@ Traindata = Train.train_ai()
 def seson(current_temperature_2m, current_relative_humidity_2m):
 
     Seson_guess_response = model.generate_content("based on the this weather data: "+str(current_temperature_2m)+"and"+str(current_relative_humidity_2m) +
-                                                  ", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
+                                                  "%"+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
     season_weather = Seson_guess_response.text.strip()
     season = None
     weather = None
