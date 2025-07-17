@@ -19,13 +19,10 @@ st.title("Seasional recipe generator")
 
 st.write("Please enter your location to get a recipe based on the current weather and season.")
 
-city= st.selectbox(
+city = st.selectbox(
     "Select your city",
     ["Mumbai", "Ladakh", "Riyad", "Siberia"]
 )
-
-
-
 
 
 if st.button("Generate recipe"):
@@ -38,9 +35,12 @@ if st.button("Generate recipe"):
             lat, long = 24.7136, 46.6753
         elif city == "Siberia":
             lat, long = 61.0137, 99.1967
-    
-        temp,humidity = Weather.get_weathar(lat, long)
-        recipe = Genai.seson(temp, humidity)
-        st.write(recipe)
+
+        temp, humidity = Weather.get_weathar(lat, long)
+        season_text, recipe_text = Genai.seson(temp, humidity)
+        full_text = season_text + "\n" + recipe_text
+        html_text = full_text.replace("\n", "<br>")
+        st.markdown(html_text, unsafe_allow_html=True)
+
     except Exception as e:
         st.error(f"An error occurred: {e}")

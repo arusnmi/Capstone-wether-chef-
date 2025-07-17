@@ -12,8 +12,7 @@ gemini_api_key = "AIzaSyDcaLxpis4q_QofT1xmu9KOwi45gfkBD6I"
 
 genai.configure(api_key=gemini_api_key)
 
-model = genai.GenerativeModel('gemini-1.0-pro')
-
+model = genai.GenerativeModel('gemini-1.5-flash-002')
 
 
 Traindata = Train.train_ai()
@@ -64,6 +63,3 @@ def custom_recpie(custom_prompt):
                                       ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
     print(response.text)
     return response.text
-
-
-
