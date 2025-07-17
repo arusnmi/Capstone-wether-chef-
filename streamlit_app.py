@@ -8,13 +8,13 @@ st.title("AI chefbot")
 
 st.write("""
 This is a simple AI chefbot that can help you with cooking recipes.
-it uses the Gemini AI model to generate recipes based on the current weather and season.
+It uses the Gemini AI model to generate recipes based on the current weather and season.
 It also allows you to input custom prompts to get recipes tailored to your preferences.
 
 """)
 
 
-st.title("Seasional recipe generator")
+st.title("Sesional recipe generator")
 
 
 st.write("Please enter your location to get a recipe based on the current weather and season.")
