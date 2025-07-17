@@ -46,16 +46,13 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
     recipes_context = filtered[['name', 'ingredients', 'diet',
                                 'flavor_profile', 'course']].head(5).to_dict(orient='records')
     prompt = (
-        f"Based on the current season/weather: {season_weather}, "
-        f"here are some recipes: {recipes_context}. "
-        f"Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
-        str(Traindata)+". "
-        f"Only provide the recipe, no additional information."
+        "Based on the current season/weather:" +str(season_weather)+"here are some recipes:" +str(recipes_context) +
+        "Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
+        str(Traindata)+". "+
+        "Only provide the recipe, no additional information."
     )
     Recpie_response = model.generate_content(prompt)
-    recpie_cleaned = clean_html(Recpie_response.text)
-    seson_cleaned = clean_html(Seson_guess_response.text)
-    return seson_cleaned, recpie_cleaned
+    return season_weather.text, Recpie_response.text
 
 
 def custom_recpie(custom_prompt):
@@ -65,7 +62,3 @@ def custom_recpie(custom_prompt):
     return response.text
 
 
-def clean_html(raw_html):
-    soup = BeautifulSoup(raw_html, "html.parser")
-    text = soup.get_text()
-    return html.unescape(text)
