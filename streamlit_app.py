@@ -3,7 +3,7 @@ import Genai
 import Weather
 
 
-# Show title and description.
+# AI
 st.title("AI chefbot")
 
 st.write("""
@@ -25,7 +25,7 @@ city = st.selectbox(
 )
 
 
-if st.button("Generate recipe"):
+if st.button("Generate sesional recipe"):
     try:
         if city == "Mumbai":
             lat, long = 18.9582, 72.8321
