@@ -1,8 +1,7 @@
 import google.generativeai as genai
-from bs4 import BeautifulSoup
-import html
 
-import Weather
+
+
 import Train
 import pandas as pd
 
