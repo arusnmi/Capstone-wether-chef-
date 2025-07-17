@@ -10,7 +10,6 @@ sqlite3
 requests_cache
 retry_requests
 openmeteo_requests
-bs4
-html
+
 
 
