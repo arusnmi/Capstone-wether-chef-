@@ -44,3 +44,20 @@ if st.button("Generate recipe"):
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
+
+
+st.title("Custom recipe generator")
+
+st.write("You can also input a custom prompt to get a recipe tailored to your preferences.")
+
+custom_prompt = st.text_area("Enter your custom prompt here:")
+
+if st.button("Generate custom recipe"):
+    try:
+        if custom_prompt:
+            recipe_text = Genai.custom_recpie(custom_prompt)
+            st.markdown(recipe_text, unsafe_allow_html=True)
+        else:
+            st.error("Please enter a custom prompt.")   
+    except Exception as e:
+        st.error(f"An error occurred: {e}")

@@ -59,7 +59,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
 
 def custom_recpie(custom_prompt):
-    response = model.generate_content("based on this data: "+str(custom_prompt) +
+    response = model.generate_content("based on this data: "+str(Traindata) +
                                       ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
     print(response.text)
     return response.text
