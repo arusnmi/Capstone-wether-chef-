@@ -164,3 +164,11 @@ def train_ai():
     
    
     return prompt
+
+
+
+def train_ingern():
+    prompt="""
+    [(butter with salt,11),(cheese gouda,209),(sour cream light,617),(sour cream,617),(cream cheese,617),(cream,617),(milk,617),(yogurt,617),(cottage cheese,617),(mozzarella cheese,617),(parmesan cheese,617),(ricotta cheese,617),(feta cheese,617),(blue cheese,617),(goat cheese,617)]
+    """
+    return prompt

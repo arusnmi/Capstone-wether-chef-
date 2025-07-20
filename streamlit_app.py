@@ -40,6 +40,7 @@ if st.button("Generate sesional recipe"):
         season_text, recipe_text = Genai.seson(temp, humidity)
         full_text = season_text + "\n" + recipe_text
         html_text = full_text.replace("\n", "<br>")
+        Genai.minus_ingredient(recipe_text)
         st.markdown(html_text, unsafe_allow_html=True)
 
     except Exception as e:
@@ -56,6 +57,7 @@ if st.button("Generate custom recipe"):
     try:
         if custom_prompt:
             recipe_text = Genai.custom_recpie(custom_prompt)
+            Genai.minus_ingredient(recipe_text)
             st.markdown(recipe_text, unsafe_allow_html=True)
         else:
             st.error("Please enter a custom prompt.")   

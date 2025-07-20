@@ -1,7 +1,6 @@
 import google.generativeai as genai
 
-
-
+import sqlite3
 import Train
 import pandas as pd
 
@@ -13,8 +12,38 @@ genai.configure(api_key=gemini_api_key)
 
 model = genai.GenerativeModel('gemini-1.5-flash-002')
 
-
+connection = sqlite3.connect('inventory.db')
+cursor = connection.cursor()
 Traindata = Train.train_ai()
+ingren_list = Train.train_ingern()
+ingredieants = cursor.execute("SELECT * FROM my_table")
+ingredients_list = [row[0] for row in ingredieants.fetchall()]
+
+
+def minus_ingredient(response):
+    ingredieant_list = model.generate_content("can you give me onlu the list of ingredieants and the amount used from this recpie " +
+                                              response+"in this format" + str(ingren_list) + "please ony give the ingredieants in a list format")
+    print(ingredieant_list.text)
+    for item in ingredieant_list.text.split(","):
+        item = item.strip()
+        if item:
+            try:
+                # Split by last space and try to convert to integer
+                parts = item.rsplit(" ", 1)
+                if len(parts) == 2 and parts[1].strip().isdigit():
+                    ingredient_name = parts[0].strip()
+                    quantity = int(parts[1].strip())
+                    current_value = cursor.execute(
+                        "SELECT Quantity FROM my_table WHERE Ingredient = ?", (ingredient_name,)).fetchone()
+                    if current_value:
+                        new_value = current_value[0] - quantity
+                        if new_value < 0:
+                            new_value = 0
+                        cursor.execute("UPDATE my_table SET Quantity = ? WHERE Ingredient = ?",
+                                       (new_value, ingredient_name))
+            except (ValueError, IndexError) as e:
+                print(f"Skipping invalid ingredient format: {item}")
+                connection.commit()
 
 
 def seson(current_temperature_2m, current_relative_humidity_2m):
@@ -44,6 +73,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
     # Prepare context for Gemini
     recipes_context = filtered[['name', 'ingredients', 'diet',
                                 'flavor_profile', 'course']].head(5).to_dict(orient='records')
+    recipes_context.append({"ingredients": ingredients_list})
     prompt = (
 
 
@@ -59,6 +89,6 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
 def custom_recpie(custom_prompt):
     response = model.generate_content("based on this data: "+str(Traindata) +
-                                      ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
+                                      ",and this list of ingredients"+ingredients_list + ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
     print(response.text)
     return response.text

@@ -13,4 +13,3 @@ def Get_values_from_inven(ingredient_name):
 def Update_values_inven(ingredient_name, new_value):
         cursor.execute("UPDATE my_table SET Quantity = ? WHERE Ingredient = ?", (new_value, ingredient_name))
         connection.commit()
-        
