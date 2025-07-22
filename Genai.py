@@ -21,8 +21,7 @@ ingredients_list = [row[0] for row in ingredieants.fetchall()]
 
 
 def minus_ingredient(response):
-    ingredieant_list = model.generate_content("can you give me onlu the list of ingredieants and the amount used from this recpie " +
-                                              response+"in this format" + str(ingren_list) + "please ony give the ingredieants in a list format")
+    ingredieant_list = model.generate_content("can you give me onlu the list of ingredieants and the amount used from this recpie " +response+"in this format" + str(ingren_list) + "please ony give the ingredieants in a list format")
     print(ingredieant_list.text)
     for item in ingredieant_list.text.split(","):
         item = item.strip()
@@ -39,8 +38,7 @@ def minus_ingredient(response):
                         new_value = current_value[0] - quantity
                         if new_value < 0:
                             new_value = 0
-                        cursor.execute("UPDATE my_table SET Quantity = ? WHERE Ingredient = ?",
-                                       (new_value, ingredient_name))
+                        cursor.execute("UPDATE my_table SET Quantity = ? WHERE Ingredient = ?",(new_value, ingredient_name))
             except (ValueError, IndexError) as e:
                 print(f"Skipping invalid ingredient format: {item}")
                 connection.commit()
@@ -48,8 +46,7 @@ def minus_ingredient(response):
 
 def seson(current_temperature_2m, current_relative_humidity_2m):
 
-    Seson_guess_response = model.generate_content("based on the this weather data: "+str(current_temperature_2m)+"and"+str(current_relative_humidity_2m) +
-                                                  "%"+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
+    Seson_guess_response = model.generate_content("based on the this weather data: "+str(current_temperature_2m)+"and"+str(current_relative_humidity_2m) +"%"+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
     season_weather = Seson_guess_response.text.strip()
     season = None
     weather = None
@@ -88,7 +85,6 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
 
 def custom_recpie(custom_prompt):
-    response = model.generate_content("based on this data: "+str(Traindata) +
-                                      ",and this list of ingredients"+ingredients_list + ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
+    response = model.generate_content("based on this data: "+str(Traindata) +",and this list of ingredients"+ingredients_list + ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
     print(response.text)
     return response.text

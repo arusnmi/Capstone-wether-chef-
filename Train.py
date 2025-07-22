@@ -162,7 +162,6 @@ def train_ai():
 
     """
     
-   
     return prompt
 
 
