@@ -76,15 +76,16 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
         f"Based on the current season/weather: {season_weather}, "
         f"here are some recipes: {recipes_context}. "
-        f"Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
+        f"Suggest atleast 3 recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
         str(Traindata)+". "
         f"Only provide the recipe, no additional information."
+        f"seprate the recpies with words like alternative, or option, or you can use a number like 1,2,3"
     )
     Recpie_response = model.generate_content(prompt)
     return Seson_guess_response.text, Recpie_response.text
 
 
 def custom_recpie(custom_prompt):
-    response = model.generate_content("based on this data: "+str(Traindata) +",and this list of ingredients"+ingredients_list + ", give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt)
+    response = model.generate_content("based on this data: "+str(Traindata) +",and this list of ingredients"+ingredients_list + ", give me at least 3 recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt+"seprate the recpies with words like alternative, or option, or you can use a number like 1,2,3")
     print(response.text)
     return response.text
