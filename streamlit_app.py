@@ -45,7 +45,21 @@ def generate_sesonal_recipe(city):
     st.markdown(html_text, unsafe_allow_html=True)
     if st.button("Suggest another recipe"):
         try:
-            generate_sesonal_recipe(city)
+            if city == "Mumbai":
+                lat, long = 18.9582, 72.8321
+            elif city == "Ladakh":
+                lat, long = 34.2268, 77.5619
+            elif city == "Riyad":
+                lat, long = 24.7136, 46.6753
+            elif city == "Siberia":
+                lat, long = 61.0137, 99.1967
+
+            temp, humidity = Weather.get_weathar(lat, long)
+            season_text, recipe_text = Genai.seson(temp, humidity)
+            full_text = season_text + "\n" + recipe_text
+            html_text = full_text.replace("\n", "<br>")
+            Genai.minus_ingredient(recipe_text)
+            st.markdown(html_text, unsafe_allow_html=True)
         except Exception as e:
             st.error(f"An error occurred: {e}")
     
@@ -103,7 +117,9 @@ def custom_recpie(custom_prompt):
         st.markdown(recipe_text, unsafe_allow_html=True)
         if st.button("Suggest another recipe"):
             try:
-                generate_sesonal_recipe(city)
+                recipe_text = Genai.custom_recpie(custom_prompt)
+                Genai.minus_ingredient(recipe_text)
+                st.markdown(recipe_text, unsafe_allow_html=True)
             except Exception as e:
                 st.error(f"An error occurred: {e}")
     else:
