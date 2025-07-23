@@ -53,10 +53,19 @@ if st.button("Generate sesional recipe"):
 
 st.title("Custom recipe generator")
 
-st.write("You can also input a custom prompt to get a recipe tailored to your preferences.")
+st.write("You can also input a custom prompt to get a recipe tailored to your preferences. Also use the boxes to add filters to the recpie")
+course=st.selectbox(
+        "Select a Course Type",
+        ["Appetizer", "Main Course", "Dessert", "Beverage"]
+    )
+flavor=st.selectbox(
+        "Select a Flavor Profile",
+        ["Spicy", "Sweet", "Savory", "Sour", "Bitter", "Umami"]
+    )
 
+time = st.text_input("Enter the ampunt of prep ime you want for the recipe (in minutes):")
 custom_prompt = st.text_area("Enter your custom prompt here:")
-
+custom_prompt+=f"Course: {course}, Flavor: {flavor}, Prep Time: {time} minutes. " + custom_prompt
 if st.button("Generate custom recipe"):
         try:
             if custom_prompt:
