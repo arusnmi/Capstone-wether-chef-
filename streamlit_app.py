@@ -58,14 +58,34 @@ course=st.selectbox(
         "Select a Course Type",
         ["Appetizer", "Main Course", "Dessert", "Beverage"]
     )
+if course == "Appetizer":
+    selected_course= "Appetizer"
+elif course == "Main Course":
+    selected_course= "Main Course"
+elif course == "Dessert":
+    selected_course= "Dessert"
+elif course == "Beverage":
+    selected_course= "Beverage"
 flavor=st.selectbox(
         "Select a Flavor Profile",
         ["Spicy", "Sweet", "Savory", "Sour", "Bitter", "Umami"]
     )
+if flavor == "Spicy":
+    selected_flavor= "Spicy"
+elif flavor == "Sweet":
+    selected_flavor= "Sweet"
+elif flavor == "Savory":
+    selected_flavor= "Savory"
+elif flavor == "Sour":
+    selected_flavor= "Sour"
+elif flavor == "Bitter":
+    selected_flavor= "Bitter"
+elif flavor == "Umami":
+    selected_flavor= "Umami"
 
 time = st.text_input("Enter the ampunt of prep ime you want for the recipe (in minutes):")
 custom_prompt = st.text_area("Enter your custom prompt here:")
-custom_prompt = custom_prompt +"courses: " + str(course) + ", flavor: " + str(flavor) + ", prep time: " + str(time) +  custom_prompt
+custom_prompt = custom_prompt +"courses: " + str(selected_course) + ", flavor: " + str(selected_flavor) + ", prep time: " + str(time) +  custom_prompt
 if st.button("Generate custom recipe"):
         try:
             if custom_prompt:
