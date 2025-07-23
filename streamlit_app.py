@@ -65,7 +65,7 @@ flavor=st.selectbox(
 
 time = st.text_input("Enter the ampunt of prep ime you want for the recipe (in minutes):")
 custom_prompt = st.text_area("Enter your custom prompt here:")
-custom_prompt = f"Course: {course}, Flavor: {flavor}, Prep Time: {time} minutes. {custom_prompt}"
+custom_prompt = custom_prompt +"courses: " + str(course) + ", flavor: " + str(flavor) + ", prep time: " + str(time) +  custom_prompt
 if st.button("Generate custom recipe"):
         try:
             if custom_prompt:
