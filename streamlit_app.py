@@ -83,9 +83,10 @@ elif flavor == "Bitter":
 elif flavor == "Umami":
     selected_flavor= "Umami"
 
-time = st.text_input("Enter the ampunt of prep ime you want for the recipe (in minutes):")
+time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
 custom_prompt = st.text_area("Enter your custom prompt here:")
-custom_prompt = custom_prompt +"courses: " + str(selected_course) + ", flavor: " + str(selected_flavor) + ", prep time: " + str(time) +  custom_prompt
+if custom_prompt:
+    custom_prompt = f"{custom_prompt} courses: {selected_course}, flavor: {selected_flavor}, prep time: {time}"
 if st.button("Generate custom recipe"):
         try:
             if custom_prompt:
