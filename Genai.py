@@ -10,7 +10,7 @@ gemini_api_key = "AIzaSyDcaLxpis4q_QofT1xmu9KOwi45gfkBD6I"
 
 genai.configure(api_key=gemini_api_key)
 
-model = genai.GenerativeModel('gemini-1.5-flash-002')
+model = genai.GenerativeModel('gemini-2.0-flash-lite')
 
 connection = sqlite3.connect('inventory.db')
 cursor = connection.cursor()
