@@ -71,7 +71,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
     # Prepare context for Gemini
     recipes_context = filtered[['name', 'ingredients', 'diet',
-                                'flavor_profile', 'course']].head(5).to_dict(orient='records')
+                                'flavor_profile', 'course']].to_dict(orient='records')
     recipes_context.append({"ingredients": ingredients_list})
     prompt = (
 
