@@ -86,6 +86,6 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
 
 def custom_recpie(custom_prompt):
-    response = model.generate_content("based on this data: "+str(Traindata) +",and this list of ingredients"+ingredients_list + ", give me at least 3 recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: "+custom_prompt+"seprate the recpies with words like alternative, or option, or you can use a number like 1,2,3")
+    response = model.generate_content(f"based on this data: {str(Traindata)}, and this list of ingredients: {str(ingredients_list)}, give me at least 3 recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: {custom_prompt}. Separate the recipes with words like alternative, or option, or you can use numbers like 1,2,3")
     print(response.text)
     return response.text
