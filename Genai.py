@@ -21,8 +21,9 @@ ingredients_list = [row[0] for row in ingredieants.fetchall()]
 
 
 def minus_ingredient(response):
-    ingredieant_list = model.generate_content("can you give me onlu the list of ingredieants and the amount used from this recpie " +response+"in this format" + str(ingren_list) + "please ony give the ingredieants in a list format")
-    print(ingredieant_list.text)
+    ingredieant_list = response.split("Ingredients:")[1].split("Instructions:")[0].strip()
+    if not ingredieant_list:
+        return "No ingredients found in the recipe."    
     for item in ingredieant_list.text.split(","):
         item = item.strip()
         if item:
@@ -48,18 +49,16 @@ def minus_ingredient(response):
 
 def seson(current_temperature_2m, current_relative_humidity_2m):
 
-    Seson_guess_response = model.generate_content("based on the this weather data: "+str(current_temperature_2m)+"and"+str(current_relative_humidity_2m) +"%"+", and the prameters that are: if the Temperature is 30 degreese or below it is cold,  and the Humidity is high if it is above 70%,  can you tell me if it is hot or cold, and if it is humid or dry")
-    season_weather = Seson_guess_response.text.strip()
     season = None
     weather = None
-    if "cold" in season_weather.lower():
+    if current_temperature_2m >30:
         season = "Winter"
-    if "humid" in season_weather.lower():
-        weather = "Humid"
-    if "hot" in season_weather.lower():
+    if current_relative_humidity_2m > 80:
+        weather = "Dry"
+    if current_temperature_2m <30:
         season = "Summer"
-    if "dry" in season_weather.lower():
-        weather = "Any"
+    if current_relative_humidity_2m < 80:
+        weather = "Humid"
 
     filtered = dataframe
     if season:
@@ -76,7 +75,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
     prompt = (
 
 
-        f"Based on the current season/weather: {season_weather}, "
+        f"Based on the current season/weather: {season,weather}, "
         f"here are some recipes: {recipes_context}. "
         f"Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
         str(Traindata)+". "
@@ -84,7 +83,8 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
         f"also pick random recpies from the list of recpies each and every time you generate a recpie"
     )
     Recpie_response = model.generate_content(prompt)
-    return Seson_guess_response.text, Recpie_response.text
+    Seson_guess_response = "current season: "+str(season) + "And current weather: " + str(weather)
+    return Seson_guess_response, Recpie_response.text
 
 
 def custom_recpie(custom_prompt):
