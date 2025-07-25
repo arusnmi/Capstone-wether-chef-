@@ -10,12 +10,16 @@ def get_db():
         thread_local.cursor = thread_local.connection.cursor()
     return thread_local.connection, thread_local.cursor
 
-def Get_values_from_inven(ingredient_name):
-        _, cursor = get_db()
-        ingrefind = cursor.execute("SELECT * FROM my_table WHERE Ingredient= ?", (ingredient_name,))
+def Get_values_from_inven():
+        cursor = get_db()
+        ingrefind = cursor.execute("SELECT Ingredient FROM my_table ")
         ingredeant_value = cursor.fetchall()
         return ingredeant_value
-
+def show_values_from_inven(ingredient_name):
+        cursor = get_db()
+        ingrefind = cursor.execute("SELECT Quantity FROM my_table WHERE Ingredient = ?", (ingredient_name,))
+        ingredeant_value = ingrefind.fetchone()
+        return ingredeant_value
 def Update_values_inven(ingredient_name, new_value):
         connection, cursor = get_db()
         cursor.execute("UPDATE my_table SET Quantity = ? WHERE Ingredient = ?", (new_value, ingredient_name))

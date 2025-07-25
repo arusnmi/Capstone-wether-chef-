@@ -151,11 +151,14 @@ if st.button("Add Ingredient"):
 
 
 st.title("Current Inventory Status")
-    
-ingredient_name = st.text_input("Enter the ingredient name to check:")
+ingredient_list = inventory_managment.Get_values_from_inven()
+ingredient_name = st.selectbox(
+        "Select an ingredient to check its quantity:",
+        [ingredient[0] for ingredient in ingredient_list]
+    )
 if st.button("Check Inventory"):
         try:
-            inventory_value = inventory_managment.Get_values_from_inven(ingredient_name)
+            inventory_value = inventory_managment.show_values_from_inven(ingredient_name)
             if inventory_value:
                 st.write(f"Current quantity of {ingredient_name}: {inventory_value[0][1]}")
             else:

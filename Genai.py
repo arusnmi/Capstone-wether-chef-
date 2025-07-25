@@ -80,7 +80,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
         f"Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
         str(Traindata)+". "
         f"Only provide the recipe, no additional information."
-        f"also pick random recpies from the list of recpies each and every time you generate a recpie"
+        f"also pick a diffrent recpie from the list of recpies each and every time you generate a recpie"
     )
     Recpie_response = model.generate_content(prompt)
     Seson_guess_response = "current season: "+str(season) + "And current weather: " + str(weather)
