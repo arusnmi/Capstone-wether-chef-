@@ -47,7 +47,7 @@ def minus_ingredient(response):
                 connection.commit()
 
 
-def seson(current_temperature_2m, current_relative_humidity_2m):
+def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, time):
 
     season = None
     weather = None
@@ -77,9 +77,11 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
         f"Based on the current season/weather: {season,weather}, "
         f"here are some recipes: {recipes_context}. "
-        f"Suggest a recipe that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
+        f"Suggest atleast 3 recipes that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
         str(Traindata)+". "
         f"Only provide the recipe, no additional information."
+        f"use words like 'Alternativly you can use' and 'You can also try' to suggest alternatives. "
+        f"use the filters provided by the user, like course, flavor, and time. those filters are: course: {course}, flavor: {flavor}, prep time: {time} in minutes. "
         f"also pick a diffrent recpie from the list of recpies each and every time you generate a recpie"
     )
     Recpie_response = model.generate_content(prompt)
@@ -88,6 +90,6 @@ def seson(current_temperature_2m, current_relative_humidity_2m):
 
 
 def custom_recpie(custom_prompt):
-    response = model.generate_content(f"based on this data: {str(Traindata)}, and this list of ingredients: {str(ingredients_list)}, give me a recipe that is suitable for this season, but only give the recipe, and also follow this custom prompt: {custom_prompt} , also pick random recpies from the list of recpies each and every time you generate a recpie")
+    response = model.generate_content(f"based on this data: {str(Traindata)}, and this list of ingredients: {str(ingredients_list)}, give me atleast 3 recipes that is suitable for this season, but only give the recipe, and also follow this custom prompt: {custom_prompt} ,use words like 'Alternativly you can use' and 'You can also try' to suggest alternatives, also pick random recpies from the list of recpies each and every time you generate a recpie")
     print(response.text)
     return response.text

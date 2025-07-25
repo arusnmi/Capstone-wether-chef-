@@ -21,61 +21,7 @@ st.write("""
 st.title("Sesional recipe generator")
 
 
-st.write("Please enter your location to get a recipe based on the current weather and season.")
-
-city = st.selectbox(
-        "Select your city",
-        ["Mumbai", "Ladakh", "Riyad", "Siberia"]
-    )
-def generate_sesonal_recipe(city):
-    if city == "Mumbai":
-        lat, long = 18.9582, 72.8321
-    elif city == "Ladakh":
-        lat, long = 34.2268, 77.5619
-    elif city == "Riyad":
-        lat, long = 24.7136, 46.6753
-    elif city == "Siberia":
-        lat, long = 61.0137, 99.1967
-
-    temp, humidity = Weather.get_weathar(lat, long)
-    season_text, recipe_text = Genai.seson(temp, humidity)
-    full_text = season_text + "\n" + recipe_text
-    html_text = full_text.replace("\n", "<br>")
-    Genai.minus_ingredient(recipe_text)
-    st.markdown(html_text, unsafe_allow_html=True)
-    if st.button("Suggest another recipe"):
-        try:
-            if city == "Mumbai":
-                lat, long = 18.9582, 72.8321
-            elif city == "Ladakh":
-                lat, long = 34.2268, 77.5619
-            elif city == "Riyad":
-                lat, long = 24.7136, 46.6753
-            elif city == "Siberia":
-                lat, long = 61.0137, 99.1967
-
-            temp, humidity = Weather.get_weathar(lat, long)
-            season_text, recipe_text = Genai.seson(temp, humidity)
-            full_text = season_text + "\n" + recipe_text
-            html_text = full_text.replace("\n", "<br>")
-            Genai.minus_ingredient(recipe_text)
-            st.markdown(html_text, unsafe_allow_html=True)
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-    
-
-
-if st.button("Generate sesional recipe"):
-        try:
-            generate_sesonal_recipe(city)
-
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-
-
-st.title("Custom recipe generator")
-
-st.write("You can also input a custom prompt to get a recipe tailored to your preferences. Also use the boxes to add filters to the recpie")
+st.write("Please enter your location to get a recipe based on the current weather and season.Also use the filters to narrow down your recipe search.")
 course=st.selectbox(
         "Select a Course Type",
         ["Appetizer", "Main Course", "Dessert", "Beverage"]
@@ -104,12 +50,49 @@ elif flavor == "Bitter":
     selected_flavor= "Bitter"
 elif flavor == "Umami":
     selected_flavor= "Umami"
+city = st.selectbox(
+        "Select your city",
+        ["Mumbai", "Ladakh", "Riyad", "Siberia"]
+    )
+def generate_sesonal_recipe(city):
+    try:
+        if city == "Mumbai":
+            lat, long = 18.9582, 72.8321
+        elif city == "Ladakh":
+            lat, long = 34.2268, 77.5619
+        elif city == "Riyad":
+            lat, long = 24.7136, 46.6753
+        elif city == "Siberia":
+            lat, long = 61.0137, 99.1967
+        temp, humidity = Weather.get_weathar(lat, long,course=selected_course, flavor=selected_flavor, time=time)
+        season_text, recipe_text = Genai.seson(temp, humidity)
+        full_text = season_text + "\n" + recipe_text
+        html_text = full_text.replace("\n", "<br>")
+        Genai.minus_ingredient(recipe_text)
+        st.markdown(html_text, unsafe_allow_html=True)
+
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+    
+
+
+if st.button("Generate sesional recipe"):
+        try:
+            generate_sesonal_recipe(city)
+            st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
+
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+
+
+st.title("Custom recipe generator")
+
+st.write("You can also input a custom prompt to get a recipe tailored to your preferences. ")
+
 
 time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
 custom_prompt = st.text_area("Enter your custom prompt here:")
-if custom_prompt:
-    prompt_additions = f" courses: {selected_course}, flavor: {selected_flavor}, prep time: {time}"
-    custom_prompt = str(custom_prompt) + str(prompt_additions)
+
 def custom_recpie(custom_prompt):
     if custom_prompt:
         recipe_text = Genai.custom_recpie(custom_prompt)
