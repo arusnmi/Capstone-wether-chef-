@@ -50,6 +50,7 @@ elif flavor == "Bitter":
     selected_flavor= "Bitter"
 elif flavor == "Umami":
     selected_flavor= "Umami"
+time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
 city = st.selectbox(
         "Select your city",
         ["Mumbai", "Ladakh", "Riyad", "Siberia"]
@@ -76,7 +77,7 @@ def generate_sesonal_recipe(city):
     
 
 
-if st.button("Generate sesional recipe"):
+if st.button("Generate recipe"):
         try:
             generate_sesonal_recipe(city)
             st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
@@ -90,7 +91,7 @@ st.title("Custom recipe generator")
 st.write("You can also input a custom prompt to get a recipe tailored to your preferences. ")
 
 
-time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
+
 custom_prompt = st.text_area("Enter your custom prompt here:")
 
 def custom_recpie(custom_prompt):
