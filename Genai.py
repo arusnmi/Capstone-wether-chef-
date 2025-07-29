@@ -85,7 +85,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
         f"also pick a diffrent recpie from the list of recpies each and every time you generate a recpie"
     )
     Recpie_response = model.generate_content(prompt)
-    Seson_guess_response = "current season: "+str(season) + "And current weather: " + str(weather)
+    Seson_guess_response = "current season: "+str(season) + " And current weather: " + str(weather)
     return Seson_guess_response, Recpie_response.text
 
 
