@@ -91,5 +91,4 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
 
 def custom_recpie(custom_prompt):
     response = model.generate_content(f"based on this data: {str(Traindata)}, and this list of ingredients: {str(ingredients_list)}, give me atleast 3 recipes that is suitable for this season, but only give the recipe, and also follow this custom prompt: {custom_prompt} ,use words like 'Alternativly you can use' and 'You can also try' to suggest alternatives, also pick random recpies from the list of recpies each and every time you generate a recpie")
-    print(response.text)
-    return response.text
+    return response.text if response else "No recipe generated"
