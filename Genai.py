@@ -53,11 +53,11 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
     weather = None
     if current_temperature_2m >30:
         season = "Winter"
-    if current_relative_humidity_2m > 80:
+    if current_relative_humidity_2m < 80:
         weather = "Dry"
     if current_temperature_2m <30:
         season = "Summer"
-    if current_relative_humidity_2m < 80:
+    if current_relative_humidity_2m > 80:
         weather = "Humid"
 
     filtered = dataframe
@@ -87,7 +87,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
     
     # Generate three recipes
     Recpie_response = model.generate_content(prompt)
-    Seson_guess_response = "current season: "+str(season)+", because the current temperature in " + str(city)+"is "+ str(current_temperature_2m)+"c at the current time "+" And current weather: " + str(weather)+"because the current relative humidity is " + str(current_relative_humidity_2m) + "%"+" in the city"
+    Seson_guess_response = "current season: "+str(season)+", because the current temperature in " + str(city)+"is "+ str(current_temperature_2m)+"c at the current time "+" And current weather: " + str(weather)+", because the current relative humidity is " + str(current_relative_humidity_2m) + "%"+" in the city"
     
     return Seson_guess_response, Recpie_response.text
 
