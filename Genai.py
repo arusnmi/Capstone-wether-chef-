@@ -47,7 +47,7 @@ def minus_ingredient(response):
                 connection.commit()
 
 
-def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, time):
+def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, time, city ):
 
     season = None
     weather = None
@@ -87,7 +87,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
     
     # Generate three recipes
     Recpie_response = model.generate_content(prompt)
-    Seson_guess_response = "current season: "+str(season) + " And current weather: " + str(weather)
+    Seson_guess_response = "current season: "+str(season)+", because the current temperature in " + str(city)+"is "+ current_temperature_2m+"c at the current time "+" And current weather: " + str(weather)+"because the current relative humidity is " + str(current_relative_humidity_2m) + "%"+" in the city"
     
     return Seson_guess_response, Recpie_response.text
 

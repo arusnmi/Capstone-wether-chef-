@@ -66,7 +66,7 @@ def generate_sesonal_recipe(city):
         elif city == "Siberia":
             lat, long = 61.0137, 99.1967
         temp, humidity = Weather.get_weathar(lat, long,)
-        season_text, recipe_text = Genai.seson(temp, humidity, course=selected_course, flavor=selected_flavor, time=time)
+        season_text, recipe_text = Genai.seson(temp, humidity, course=selected_course, flavor=selected_flavor, time=time, city=city)
         full_text = season_text + "\n" + recipe_text
         html_text = full_text.replace("\n", "<br>")
         Genai.minus_ingredient(recipe_text)
