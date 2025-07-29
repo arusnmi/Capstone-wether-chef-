@@ -144,7 +144,7 @@ if st.button("Check Inventory"):
         try:
             inventory_value = inventory_managment.show_values_from_inven(ingredient_name)
             if inventory_value:
-                st.write(f"Current quantity of {ingredient_name}: {inventory_value[0][1]}")
+                st.write(f"Current quantity of {ingredient_name}: {inventory_value[0]}")
             else:
                 st.write(f"{ingredient_name} not found in the inventory.")
         except Exception as e:
