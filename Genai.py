@@ -24,7 +24,7 @@ def minus_ingredient(response):
     ingredieant_list = response.split("Ingredients:")[1].split("Instructions:")[0].strip()
     if not ingredieant_list:
         return "No ingredients found in the recipe."    
-    for item in ingredieant_list.text.split(","):
+    for item in ingredieant_list.split(","):
         item = item.strip()
         if item:
             try:
@@ -86,7 +86,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
     )
     Recpie_response = model.generate_content(prompt)
     Seson_guess_response = "current season: "+str(season) + "And current weather: " + str(weather)
-    return Seson_guess_response.text, Recpie_response.text
+    return Seson_guess_response, Recpie_response.text
 
 
 def custom_recpie(custom_prompt):
