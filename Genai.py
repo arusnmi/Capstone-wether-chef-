@@ -51,11 +51,11 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
 
     season = None
     weather = None
-    if current_temperature_2m >30:
+    if current_temperature_2m <30:
         season = "Winter"
     if current_relative_humidity_2m < 80:
         weather = "Dry"
-    if current_temperature_2m <30:
+    if current_temperature_2m >30:
         season = "Summer"
     if current_relative_humidity_2m > 80:
         weather = "Humid"
