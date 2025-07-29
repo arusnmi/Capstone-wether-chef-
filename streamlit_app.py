@@ -121,12 +121,12 @@ st.write("""
     You can also view the current inventory status.
     """)
 
-st.title("Add Ingredients")
+st.title("Update Ingredients")
 
 ingredient_name = st.text_input("Enter the ingredient name:")
 quantity = st.number_input("Enter the quantity:", min_value=1, step=1)
 
-if st.button("Add Ingredient"):
+if st.button("Update Ingredient value"):
         try:
             inventory_managment.Update_values_inven(ingredient_name, quantity)
             st.success(f"Added {quantity} of {ingredient_name} to the inventory.")
