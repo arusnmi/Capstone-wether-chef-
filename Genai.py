@@ -73,22 +73,36 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
                                 'flavor_profile', 'course']].to_dict(orient='records')
     recipes_context.append({"ingredients": ingredients_list})
     prompt = (
-
-
         f"Based on the current season/weather: {season,weather}, "
         f"here are some recipes: {recipes_context}. "
-        f"Suggest atleast 3 recipes that matches the season/weather and is inspired by these options. When making the recpie make it in this format" +
-        str(Traindata)+". "
-        f"Only provide the recipe, no additional information."
-        f"use words like 'Alternativly you can use' and 'You can also try' to suggest alternatives. to split the recpies"
-        f"use the filters provided by the user, like course, flavor, and time. those filters are: course: {course}, flavor: {flavor}, prep time: {time} in minutes. "
-        f"also pick a diffrent recpie from the list of recpies each and every time you generate a recpie"
+        f"You MUST generate EXACTLY 3 different recipes that match the season/weather and are inspired by these options. "
+        f"Format each recipe exactly like this: " + str(Traindata) + ". "
+        f"Label them as 'Recipe 1:', 'Recipe 2:', and 'Recipe 3:'. "
+        f"Separate each recipe with '---'. "
+        f"Only provide the recipes, no additional text. "
+        f"Use these filters strictly: course: {course}, flavor: {flavor}, prep time: {time} minutes. "
+        f"Each recipe must be completely different from the others. "
+        f"Use 'Alternatively you can use' and 'You can also try' only within each recipe for ingredient alternatives."
     )
+    
+    # Generate three recipes
     Recpie_response = model.generate_content(prompt)
     Seson_guess_response = "current season: "+str(season) + " And current weather: " + str(weather)
+    
     return Seson_guess_response, Recpie_response.text
 
 
 def custom_recpie(custom_prompt):
-    response = model.generate_content(f"based on this data: {str(Traindata)}, and this list of ingredients: {str(ingredients_list)}, give me atleast 3 recipes that is suitable for this season, but only give the recipe, and also follow this custom prompt: {custom_prompt} ,use words like 'Alternativly you can use' and 'You can also try' to suggest alternatives, also pick random recpies from the list of recpies each and every time you generate a recpie")
+    prompt = (
+        f"Based on this data: {str(Traindata)}, "
+        f"and this list of ingredients: {str(ingredients_list)}, "
+        f"You MUST generate EXACTLY 3 different recipes following this custom prompt: {custom_prompt}. "
+        f"Label them as 'Recipe 1:', 'Recipe 2:', and 'Recipe 3:'. "
+        f"Separate each recipe with '---'. "
+        f"Format each recipe exactly like the example provided. "
+        f"Only provide the recipes, no additional text. "
+        f"Each recipe must be completely different from the others. "
+        f"Use 'Alternatively you can use' and 'You can also try' only within each recipe for ingredient alternatives."
+    )
+    response = model.generate_content(prompt)
     return response.text if response else "No recipe generated"
