@@ -6,7 +6,7 @@ thread_local = local()
 
 def get_db():
         if not hasattr(thread_local, "connection"):
-                thread_local.connection = sqlite3.connect('inventory.db')
+                thread_local.connection = sqlite3.connect('inventory_copy.db')
         
                 thread_local.cursor = thread_local.connection.cursor()
         return thread_local.connection, thread_local.cursor

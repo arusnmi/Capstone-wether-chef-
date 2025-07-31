@@ -11,9 +11,8 @@ import inventory_managment
 st.title("AI recipe generator")
 
 st.write("""
-    This is a simple AI chefbot that can help you with cooking recipes.
-    It uses the Gemini AI model to generate recipes based on the current weather and season.
-    It also allows you to input custom prompts to get recipes tailored to your preferences.
+    It uses the Gemini AI model to retrieve recipes from your curated menu based on the current weather, season, inventory availability and other chosen filters.
+    It also allows you to input custom prompts to generate custom recipes based on its knowledge base, that are not a part of your menu
 
     """)
 
@@ -77,7 +76,7 @@ def generate_sesonal_recipe(city):
     
 
 
-if st.button("Generate recipe"):
+if st.button("Recommend Recipes from Menu"):
         try:
             generate_sesonal_recipe(city)
             st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
