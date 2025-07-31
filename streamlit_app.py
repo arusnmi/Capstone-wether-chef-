@@ -3,6 +3,14 @@ import Genai
 import Weather
 import inventory_managment
 
+# Initialize session state variables
+if 'recipe_generated' not in st.session_state:
+    st.session_state.recipe_generated = False
+if 'custom_recipe_generated' not in st.session_state:
+    st.session_state.custom_recipe_generated = False
+if 'inventory_checked' not in st.session_state:
+    st.session_state.inventory_checked = False
+
 
 
 
@@ -76,13 +84,17 @@ def generate_sesonal_recipe(city):
     
 
 
-if st.button("Recommend Recipes from Menu"):
+def on_recommend_click():
+    st.session_state.recipe_generated = True
+
+if st.button("Recommend Recipes from Menu", on_click=on_recommend_click):
+    if st.session_state.recipe_generated:
         try:
             generate_sesonal_recipe(city)
             st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
-
         except Exception as e:
             st.error(f"An error occurred: {e}")
+            st.session_state.recipe_generated = False
 
 
 st.title("Custom recipe generator")
@@ -107,11 +119,16 @@ def custom_recpie(custom_prompt):
                 st.error(f"An error occurred: {e}")
     else:
         st.error("Please enter a custom prompt.") 
-if st.button("Generate custom recipe"):
+def on_custom_recipe_click():
+    st.session_state.custom_recipe_generated = True
+
+if st.button("Generate custom recipe", on_click=on_custom_recipe_click):
+    if st.session_state.custom_recipe_generated:
         try:
             custom_recpie(custom_prompt)
         except Exception as e:
             st.error(f"An error occurred: {e}")
+            st.session_state.custom_recipe_generated = False
 
 
 st.title("Inventory Management")
@@ -139,7 +156,11 @@ ingredient_name = st.selectbox(
         "Select an ingredient to check its quantity:",
         [ingredient[0] for ingredient in ingredient_list]
     )
-if st.button("Check Inventory"):
+def on_check_inventory_click():
+    st.session_state.inventory_checked = True
+
+if st.button("Check Inventory", on_click=on_check_inventory_click):
+    if st.session_state.inventory_checked:
         try:
             inventory_value = inventory_managment.show_values_from_inven(ingredient_name)
             if inventory_value:
@@ -148,3 +169,4 @@ if st.button("Check Inventory"):
                 st.write(f"{ingredient_name} not found in the inventory.")
         except Exception as e:
             st.error(f"An error occurred while checking the inventory: {e}")
+            st.session_state.inventory_checked = False
