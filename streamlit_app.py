@@ -18,7 +18,10 @@ if 'inventory_result' not in st.session_state:
 left_column, right_column = st.columns([1, 1])  # Changed from [60, 60] to [2, 1] for better proportions
 
 with left_column:
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of af224d9 (fixing error in code with funcs)
     st.title("AI recipe generator")
     st.write("""
         It uses the Gemini AI model to retrieve recipes from your curated menu based on the current weather, season, inventory availability and other chosen filters.
@@ -28,11 +31,19 @@ with left_column:
     st.title("Seasonal recipe generator")
     st.write("Please enter your location to get a recipe based on the current weather and season.Also use the filters to narrow down your recipe search.")
     
+<<<<<<< HEAD
 
     course = st.selectbox(
         "Select a Course Type",
         ["Appetizer", "Main Course", "Dessert", "Beverage"]
         )
+=======
+    # Move filters here, between description and button
+    course = st.selectbox(
+        "Select a Course Type",
+        ["Appetizer", "Main Course", "Dessert", "Beverage"]
+    )
+>>>>>>> parent of af224d9 (fixing error in code with funcs)
     if course == "Appetizer":
         selected_course = "Appetizer"
     elif course == "Main Course":
@@ -45,7 +56,11 @@ with left_column:
     flavor = st.selectbox(
         "Select a Flavor Profile",
         ["Spicy", "Sweet", "Savory", "Sour", "Bitter", "Umami"]
+<<<<<<< HEAD
         )
+=======
+    )
+>>>>>>> parent of af224d9 (fixing error in code with funcs)
     if flavor == "Spicy":
         selected_flavor = "Spicy"
     elif flavor == "Sweet":
@@ -60,12 +75,17 @@ with left_column:
         selected_flavor = "Umami"
 
     time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
+<<<<<<< HEAD
         
+=======
+    
+>>>>>>> parent of af224d9 (fixing error in code with funcs)
     city = st.selectbox(
         "Select your city",
         ["Mumbai", "Ladakh", "Riyad", "Siberia"]
     )
 
+<<<<<<< HEAD
     if st.button("Recommend Recipes from Menu"):
         try:
             current_temperature_2m, current_relative_humidity_2m = Weather.get_weather_data(city)
@@ -84,6 +104,11 @@ with left_column:
             st.error(f"An error occurred: {e}")
             st.session_state.recipe_result = None
 
+=======
+    # Button after all filters
+    if st.button("Recommend Recipes from Menu"):
+        generate_recipe()
+>>>>>>> parent of af224d9 (fixing error in code with funcs)
 
     if st.session_state.recipe_result is not None:
         st.markdown(st.session_state.recipe_result, unsafe_allow_html=True)
