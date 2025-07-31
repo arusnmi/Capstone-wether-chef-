@@ -16,7 +16,7 @@ if 'inventory_result' not in st.session_state:
 
 
 
-left_column, right_column = st.columns([6, 6])  
+left_column, right_column = st.columns([60, 60])  
 
 with left_column:
     
