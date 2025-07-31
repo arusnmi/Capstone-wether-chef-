@@ -3,7 +3,7 @@ import Genai
 import Weather
 import inventory_managment
 
-# Initialize session state variables
+
 if 'recipe_result' not in st.session_state:
     st.session_state.recipe_result = None
 if 'custom_recipe_result' not in st.session_state:
@@ -15,11 +15,11 @@ if 'inventory_result' not in st.session_state:
 
 
 
-    # Create two columns
-left_column, right_column = st.columns([2, 1])  # 2:1 ratio for better space distribution
+
+left_column, right_column = st.columns([3, 1])  
 
 with left_column:
-    # AI
+    
     st.title("AI recipe generator")
 
     st.write("""
