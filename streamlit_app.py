@@ -8,7 +8,7 @@ import inventory_managment
 
 
     # AI
-st.title("AI recpie genarator")
+st.title("AI recipe generator")
 
 st.write("""
     This is a simple AI chefbot that can help you with cooking recipes.
@@ -18,7 +18,7 @@ st.write("""
     """)
 
 
-st.title("Sesional recipe generator")
+st.title("Seasonal recipe generator")
 
 
 st.write("Please enter your location to get a recipe based on the current weather and season.Also use the filters to narrow down your recipe search.")
