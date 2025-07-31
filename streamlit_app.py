@@ -15,7 +15,7 @@ if 'inventory_result' not in st.session_state:
 
 
 # Change the column ratio to make them wider and more distinct
-left_column, right_column = st.columns([2, 1])  # Changed from [60, 60] to [2, 1] for better proportions
+left_column, right_column = st.columns([1, 1])  # Changed from [60, 60] to [2, 1] for better proportions
 
 with left_column:
     st.title("AI recipe generator")
