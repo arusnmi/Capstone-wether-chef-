@@ -14,101 +14,58 @@ if 'inventory_result' not in st.session_state:
 
 
 
-
-
-left_column, right_column = st.columns([60, 60])  
+# Change the column ratio to make them wider and more distinct
+left_column, right_column = st.columns([2, 1])  # Changed from [60, 60] to [2, 1] for better proportions
 
 with left_column:
-    
     st.title("AI recipe generator")
-
     st.write("""
         It uses the Gemini AI model to retrieve recipes from your curated menu based on the current weather, season, inventory availability and other chosen filters.
         It also allows you to input custom prompts to generate custom recipes based on its knowledge base, that are not a part of your menu
-
         """)
 
-
-with left_column:
     st.title("Seasonal recipe generator")
-    
     st.write("Please enter your location to get a recipe based on the current weather and season.Also use the filters to narrow down your recipe search.")
-course=st.selectbox(
+    
+    # Move filters here, between description and button
+    course = st.selectbox(
         "Select a Course Type",
         ["Appetizer", "Main Course", "Dessert", "Beverage"]
     )
-if course == "Appetizer":
-    selected_course= "Appetizer"
-elif course == "Main Course":
-    selected_course= "Main Course"
-elif course == "Dessert":
-    selected_course= "Dessert"
-elif course == "Beverage":
-    selected_course= "Beverage"
-flavor=st.selectbox(
+    if course == "Appetizer":
+        selected_course = "Appetizer"
+    elif course == "Main Course":
+        selected_course = "Main Course"
+    elif course == "Dessert":
+        selected_course = "Dessert"
+    elif course == "Beverage":
+        selected_course = "Beverage"
+
+    flavor = st.selectbox(
         "Select a Flavor Profile",
         ["Spicy", "Sweet", "Savory", "Sour", "Bitter", "Umami"]
     )
-if flavor == "Spicy":
-    selected_flavor= "Spicy"
-elif flavor == "Sweet":
-    selected_flavor= "Sweet"
-elif flavor == "Savory":
-    selected_flavor= "Savory"
-elif flavor == "Sour":
-    selected_flavor= "Sour"
-elif flavor == "Bitter":
-    selected_flavor= "Bitter"
-elif flavor == "Umami":
-    selected_flavor= "Umami"
-time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
-city = st.selectbox(
+    if flavor == "Spicy":
+        selected_flavor = "Spicy"
+    elif flavor == "Sweet":
+        selected_flavor = "Sweet"
+    elif flavor == "Savory":
+        selected_flavor = "Savory"
+    elif flavor == "Sour":
+        selected_flavor = "Sour"
+    elif flavor == "Bitter":
+        selected_flavor = "Bitter"
+    elif flavor == "Umami":
+        selected_flavor = "Umami"
+
+    time = st.text_input("Enter the amount of prep time you want for the recipe (in minutes):")
+    
+    city = st.selectbox(
         "Select your city",
         ["Mumbai", "Ladakh", "Riyad", "Siberia"]
     )
-def generate_sesonal_recipe(city):
-    try:
-        if city == "Mumbai":
-            lat, long = 18.9582, 72.8321
-        elif city == "Ladakh":
-            lat, long = 34.2268, 77.5619
-        elif city == "Riyad":
-            lat, long = 24.7136, 46.6753
-        elif city == "Siberia":
-            lat, long = 61.0137, 99.1967
-        temp, humidity = Weather.get_weathar(lat, long,)
-        season_text, recipe_text = Genai.seson(temp, humidity, course=selected_course, flavor=selected_flavor, time=time, city=city)
-        full_text = season_text + "\n" + recipe_text
-        html_text = full_text.replace("\n", "<br>")
-        Genai.minus_ingredient(recipe_text)
-        st.markdown(html_text, unsafe_allow_html=True)
 
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-    
-
-
-def generate_recipe():
-    try:
-        if city == "Mumbai":
-            lat, long = 18.9582, 72.8321
-        elif city == "Ladakh":
-            lat, long = 34.2268, 77.5619
-        elif city == "Riyad":
-            lat, long = 24.7136, 46.6753
-        elif city == "Siberia":
-            lat, long = 61.0137, 99.1967
-        temp, humidity = Weather.get_weathar(lat, long,)
-        season_text, recipe_text = Genai.seson(temp, humidity, course=selected_course, flavor=selected_flavor, time=time, city=city)
-        full_text = season_text + "\n" + recipe_text
-        html_text = full_text.replace("\n", "<br>")
-        Genai.minus_ingredient(recipe_text)
-        st.session_state.recipe_result = html_text
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-        st.session_state.recipe_result = None
-
-with left_column:
+    # Button after all filters
     if st.button("Recommend Recipes from Menu"):
         generate_recipe()
 
