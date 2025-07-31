@@ -4,12 +4,12 @@ import Weather
 import inventory_managment
 
 # Initialize session state variables
-if 'recipe_generated' not in st.session_state:
-    st.session_state.recipe_generated = False
-if 'custom_recipe_generated' not in st.session_state:
-    st.session_state.custom_recipe_generated = False
-if 'inventory_checked' not in st.session_state:
-    st.session_state.inventory_checked = False
+if 'recipe_result' not in st.session_state:
+    st.session_state.recipe_result = None
+if 'custom_recipe_result' not in st.session_state:
+    st.session_state.custom_recipe_result = None
+if 'inventory_result' not in st.session_state:
+    st.session_state.inventory_result = None
 
 
 
@@ -84,17 +84,32 @@ def generate_sesonal_recipe(city):
     
 
 
-def on_recommend_click():
-    st.session_state.recipe_generated = True
+def generate_recipe():
+    try:
+        if city == "Mumbai":
+            lat, long = 18.9582, 72.8321
+        elif city == "Ladakh":
+            lat, long = 34.2268, 77.5619
+        elif city == "Riyad":
+            lat, long = 24.7136, 46.6753
+        elif city == "Siberia":
+            lat, long = 61.0137, 99.1967
+        temp, humidity = Weather.get_weathar(lat, long,)
+        season_text, recipe_text = Genai.seson(temp, humidity, course=selected_course, flavor=selected_flavor, time=time, city=city)
+        full_text = season_text + "\n" + recipe_text
+        html_text = full_text.replace("\n", "<br>")
+        Genai.minus_ingredient(recipe_text)
+        st.session_state.recipe_result = html_text
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        st.session_state.recipe_result = None
 
-if st.button("Recommend Recipes from Menu", on_click=on_recommend_click):
-    if st.session_state.recipe_generated:
-        try:
-            generate_sesonal_recipe(city)
-            st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-            st.session_state.recipe_generated = False
+if st.button("Recommend Recipes from Menu"):
+    generate_recipe()
+
+if st.session_state.recipe_result is not None:
+    st.markdown(st.session_state.recipe_result, unsafe_allow_html=True)
+    st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
 
 
 st.title("Custom recipe generator")
@@ -105,30 +120,26 @@ st.write("You can also input a custom prompt to get a recipe tailored to your pr
 
 custom_prompt = st.text_area("Enter your custom prompt here:")
 
-def custom_recpie(custom_prompt):
-    if custom_prompt:
-        recipe_text = Genai.custom_recpie(custom_prompt)
-        Genai.minus_ingredient(recipe_text)
-        st.markdown(recipe_text, unsafe_allow_html=True)
-        if st.button("Suggest another recipe"):
-            try:
-                recipe_text = Genai.custom_recpie(custom_prompt)
-                Genai.minus_ingredient(recipe_text)
-                st.markdown(recipe_text, unsafe_allow_html=True)
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-    else:
-        st.error("Please enter a custom prompt.") 
-def on_custom_recipe_click():
-    st.session_state.custom_recipe_generated = True
+def generate_custom_recipe():
+    try:
+        if custom_prompt:
+            recipe_text = Genai.custom_recpie(custom_prompt)
+            Genai.minus_ingredient(recipe_text)
+            st.session_state.custom_recipe_result = recipe_text
+        else:
+            st.error("Please enter a custom prompt.")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        st.session_state.custom_recipe_result = None
 
-if st.button("Generate custom recipe", on_click=on_custom_recipe_click):
-    if st.session_state.custom_recipe_generated:
-        try:
-            custom_recpie(custom_prompt)
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-            st.session_state.custom_recipe_generated = False
+if st.button("Generate custom recipe"):
+    generate_custom_recipe()
+
+if st.session_state.custom_recipe_result is not None:
+    st.markdown(st.session_state.custom_recipe_result, unsafe_allow_html=True)
+    
+    if st.button("Suggest another recipe"):
+        generate_custom_recipe()
 
 
 st.title("Inventory Management")
@@ -156,17 +167,19 @@ ingredient_name = st.selectbox(
         "Select an ingredient to check its quantity:",
         [ingredient[0] for ingredient in ingredient_list]
     )
-def on_check_inventory_click():
-    st.session_state.inventory_checked = True
+def check_inventory():
+    try:
+        inventory_value = inventory_managment.show_values_from_inven(ingredient_name)
+        if inventory_value:
+            st.session_state.inventory_result = f"Current quantity of {ingredient_name}: {inventory_value[0]}"
+        else:
+            st.session_state.inventory_result = f"{ingredient_name} not found in the inventory."
+    except Exception as e:
+        st.error(f"An error occurred while checking the inventory: {e}")
+        st.session_state.inventory_result = None
 
-if st.button("Check Inventory", on_click=on_check_inventory_click):
-    if st.session_state.inventory_checked:
-        try:
-            inventory_value = inventory_managment.show_values_from_inven(ingredient_name)
-            if inventory_value:
-                st.write(f"Current quantity of {ingredient_name}: {inventory_value[0]}")
-            else:
-                st.write(f"{ingredient_name} not found in the inventory.")
-        except Exception as e:
-            st.error(f"An error occurred while checking the inventory: {e}")
-            st.session_state.inventory_checked = False
+if st.button("Check Inventory"):
+    check_inventory()
+
+if st.session_state.inventory_result is not None:
+    st.write(st.session_state.inventory_result)
