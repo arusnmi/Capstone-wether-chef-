@@ -472,13 +472,17 @@ elif page == "Inventory Management":
                     with col_name:
                         st.write(f"{ingredient[0]}")
                     with col_qty:
-                        qty = inventory_managment.show_values_from_inven(ingredient[0])
-                        if qty:
-                            if qty[0] < 10:  # Low stock warning
-                                st.write(f"⚠️ {qty[0]}")
+                        try:
+                            qty = inventory_managment.show_values_from_inven(ingredient[0])
+                            if qty and qty[0] is not None:
+                                quantity_value = qty[0]
+                                if quantity_value < 10:  # Low stock warning
+                                    st.write(f"⚠️ {quantity_value}")
+                                else:
+                                    st.write(f"✅ {quantity_value}")
                             else:
-                                st.write(f"✅ {qty[0]}")
-                        else:
+                                st.write("❌ 0")
+                        except (TypeError, IndexError):
                             st.write("❌ 0")
                 
                 if len(ingredient_list) > 10:
@@ -495,9 +499,14 @@ elif page == "Inventory Management":
             low_stock_items = []
             
             for ingredient in ingredient_list:
-                qty = inventory_managment.show_values_from_inven(ingredient[0])
-                if qty and qty[0] < 10:  # Consider items with less than 10 as low stock
-                    low_stock_items.append((ingredient[0], qty[0]))
+                try:
+                    qty = inventory_managment.show_values_from_inven(ingredient[0])
+                    if qty and qty[0] is not None and isinstance(qty[0], (int, float)):
+                        if qty[0] < 10:  # Consider items with less than 10 as low stock
+                            low_stock_items.append((ingredient[0], qty[0]))
+                except (TypeError, IndexError):
+                    # Skip ingredients with invalid quantity data
+                    continue
             
             if low_stock_items:
                 for item, qty in low_stock_items[:5]:  # Show first 5 low stock items
