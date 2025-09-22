@@ -1,5 +1,5 @@
 def train_ai():
-    prompt="""Provide recpies based on the dataset given and the examples below:
+    prompt="""Provide recipes based on the dataset given and the examples below:
 
 
     User: I want to make a simple lentil dish.
@@ -165,9 +165,126 @@ def train_ai():
     return prompt
 
 
-
 def train_ingern():
     prompt="""
     [(butter with salt,11),(cheese gouda,209),(sour cream light,617),(sour cream,617),(cream cheese,617),(cream,617),(milk,617),(yogurt,617),(cottage cheese,617),(mozzarella cheese,617),(parmesan cheese,617),(ricotta cheese,617),(feta cheese,617),(blue cheese,617),(goat cheese,617)]
+    """
+    return prompt
+
+
+def train_promotion_examples():
+    """Training data for promotion generation"""
+    prompt = """
+    Examples of effective restaurant promotions:
+    
+    1. BOGO (Buy One Get One) Examples:
+    - "Buy 1 Get 1 Free on all Appetizers - Perfect for sharing!"
+    - "BOGO Pizza Tuesdays - Double the flavor, double the fun!"
+    - "Buy any Main Course, Get a Free Dessert!"
+    
+    2. Percentage Discount Examples:
+    - "25% Off All Vegetarian Dishes - Healthy choices, happy wallet!"
+    - "15% Off Your Entire Bill - Weekend Special!"
+    - "30% Off Beverages - Beat the heat with cool savings!"
+    
+    3. Combo Deal Examples:
+    - "Family Feast Combo: 2 Main Courses + 2 Sides + 4 Drinks = $39.99"
+    - "Date Night Special: Appetizer + 2 Main Courses + Dessert + Wine = $59.99"
+    - "Lunch Combo: Any Curry + Rice + Naan + Drink = $12.99"
+    
+    4. Time-Limited Offers:
+    - "Happy Hour: 50% Off All Drinks (4 PM - 6 PM)"
+    - "Early Bird Special: 20% Off Orders Before 6 PM"
+    - "Late Night Munchies: Free Appetizer with Orders After 9 PM"
+    
+    5. Seasonal Specials:
+    - "Monsoon Magic: Free Hot Soup with Every Main Course"
+    - "Summer Cooldown: Buy Any Cold Beverage, Get Ice Cream Free"
+    - "Winter Warmth: 15% Off All Hot Dishes"
+    """
+    return prompt
+
+
+def train_dietary_alternatives():
+    """Training data for dietary alternatives and substitutions"""
+    prompt = """
+    Dietary Alternative Guidelines:
+    
+    Vegan Substitutions:
+    - Dairy milk → Almond milk, oat milk, coconut milk
+    - Butter → Vegan butter, coconut oil
+    - Cheese → Cashew cheese, nutritional yeast
+    - Eggs → Flax eggs, aquafaba, banana
+    - Meat → Tofu, tempeh, legumes, jackfruit
+    
+    Gluten-Free Substitutions:
+    - Wheat flour → Almond flour, rice flour, coconut flour
+    - Bread → Gluten-free bread, lettuce wraps
+    - Pasta → Zucchini noodles, rice noodles, quinoa pasta
+    - Soy sauce → Tamari, coconut aminos
+    
+    Keto-Friendly Alternatives:
+    - Rice → Cauliflower rice
+    - Potatoes → Turnips, radishes
+    - Sugar → Stevia, erythritol, monk fruit
+    - Bread → Cloud bread, cauliflower bread
+    
+    Low-Carb Options:
+    - Pasta → Shirataki noodles, spaghetti squash
+    - Pizza crust → Cauliflower crust, portobello mushroom
+    - Wraps → Collard greens, cabbage leaves
+    
+    High-Protein Additions:
+    - Add quinoa, lentils, chickpeas
+    - Include Greek yogurt, cottage cheese
+    - Add nuts, seeds, protein powder
+    - Include lean meats, fish, tofu
+    """
+    return prompt
+
+
+def train_image_recognition_context():
+    """Training context for image recognition and menu matching"""
+    prompt = """
+    Food Image Analysis Guidelines:
+    
+    Common Food Categories to Identify:
+    1. Indian Dishes:
+       - Curries (identify by color, consistency)
+       - Bread (naan, roti, paratha)
+       - Rice dishes (biryani, pulao, fried rice)
+       - Snacks (samosas, pakoras, chaat)
+    
+    2. International Dishes:
+       - Pasta (shapes, sauces)
+       - Pizza (toppings, crust style)
+       - Salads (ingredients, dressing)
+       - Desserts (cakes, ice cream, fruits)
+    
+    3. Cooking Methods to Recognize:
+       - Grilled (char marks, dry surface)
+       - Fried (golden color, crispy texture)
+       - Steamed (moist, soft appearance)
+       - Baked (even browning, firm structure)
+    
+    4. Ingredient Identification:
+       - Vegetables (color, shape, preparation)
+       - Proteins (texture, cooking style)
+       - Grains (type, preparation method)
+       - Sauces (color, consistency, garnishes)
+    
+    5. Presentation Styles:
+       - Plating techniques
+       - Garnish identification
+       - Portion sizes
+       - Serving vessels
+    
+    When analyzing images:
+    - Focus on main ingredients
+    - Note cooking methods
+    - Identify cuisine type
+    - Consider dietary restrictions
+    - Suggest similar menu items
+    - Offer customization options
     """
     return prompt
