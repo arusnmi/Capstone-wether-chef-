@@ -11,7 +11,7 @@ import random
 
 dataframe = pd.read_csv('recipes_final.csv')
 
-gemini_api_key = "AIzaSyDcaLxpis4q_QofT1xmu9KOwi45gfkBD6I"
+gemini_api_key = "AIzaSyAj5C__UsvlWS5IAa3zvr9NygPU8aN8V_E"
 
 genai.configure(api_key=gemini_api_key)
 
