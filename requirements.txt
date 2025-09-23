@@ -4,3 +4,5 @@ pandas>=2.0.0
 Pillow>=10.0.0
 openmeteo_requests
 reqeuests
+requests_cache
+retry_requests 
