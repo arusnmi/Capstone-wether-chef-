@@ -3,6 +3,5 @@ google.generativeai>=0.8.0
 pandas>=2.0.0
 Pillow>=10.0.0
 openmeteo_requests
-reqeuests
 requests_cache
-retry_requests 
+retry_requests
