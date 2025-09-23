@@ -77,13 +77,13 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
         f"here are some recipes: {recipes_context}. "
         f"You MUST generate EXACTLY 3 different recipes that match the season/weather and are inspired by these options. "
         f"Format each recipe exactly like this: " + str(Traindata) + ". "
-        f"Label them as 'Recipe 1:', 'Recipe 2:', and 'Recipe 3:'. "
+
         f"Separate each recipe with '---'. "
-        f"Only provide the recipes, no additional text. "
+        f"Only provide the recipes, and the recpie names , no additional text. "
         f"Use these filters strictly: course: {course}, flavor: {flavor}, prep time: {time} minutes. "
         f"Each recipe must be completely different from the others. "
         f"Use 'Alternatively you can use' and 'You can also try' only within each recipe for ingredient alternatives."
-        f"start the prompt a message for the user that explanes the logic behind the choices of recpies based on weathar data recived, and show the actual numbers for humidity and tempture, as well as the city name"
+        f"start the prompt a message for the user that explanes the logic behind the choices of recpies based on weathar data recived, and show the actual numbers for humidity and tempture, as well as the city name{city}"
     )
     
     # Generate three recipes
