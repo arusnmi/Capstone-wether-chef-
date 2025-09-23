@@ -92,8 +92,9 @@ with left_column:
                 city
             )
             Genai.minus_ingredient(recipe_response)
-            st.session_state.recipe_result = recipe_response
             st.session_state.season_response = season_response
+            st.session_state.recipe_result = recipe_response
+
         except Exception as e:
             st.error(f"An error occurred: {e}")
             st.session_state.recipe_result = None
@@ -101,6 +102,7 @@ with left_column:
 
 
     if st.session_state.recipe_result is not None:
+
         st.markdown(st.session_state.recipe_result, unsafe_allow_html=True)
         st.write("You can also use my creativity to generate a custom recipe. Please use the section below")
 
