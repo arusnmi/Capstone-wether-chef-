@@ -92,9 +92,8 @@ with left_column:
                 city
             )
             Genai.minus_ingredient(recipe_response)
-            st.session_state.season_response = season_response
             st.session_state.recipe_result = recipe_response
-
+            st.session_state.season_response = season_response
         except Exception as e:
             st.error(f"An error occurred: {e}")
             st.session_state.recipe_result = None
