@@ -83,6 +83,7 @@ def seson(current_temperature_2m, current_relative_humidity_2m, course, flavor, 
         f"Use these filters strictly: course: {course}, flavor: {flavor}, prep time: {time} minutes. "
         f"Each recipe must be completely different from the others. "
         f"Use 'Alternatively you can use' and 'You can also try' only within each recipe for ingredient alternatives."
+        f"start the prompt a message for the user that explanes the logic behind the choices of recpies based on weathar data recived, and show the actual numbers for humidity and tempture, as well as the city name"
     )
     
     # Generate three recipes
